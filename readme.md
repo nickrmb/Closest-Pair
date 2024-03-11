@@ -49,3 +49,22 @@ Where any point has to consist of two comma separated decimal numbers.<br>
 Furthermore points in the file must be separated by new lines.
 
 Due to the nature of the randomized algorithm, it will only work for non-negative points. This could be fixed by rearanging all points, then arrange them back after computation.
+
+### Comparison
+
+All algorithms are successfully able to compute the correct solution.<br>
+But they differ in runtime. This can be seen in the following plot:
+
+<p align="center" width="100%">
+    <img src="misc/plot.png" width=100%><br>
+    <em>Runtime comparison between the algorithms.</em>
+</p>
+
+### Discussion
+
+Observing the results, the randomized algorithm exhibits a widely distributed runtime, with an average growth that appears linear.
+Despite its expected speed advantage among the three, the deterministic algorithm proves faster for our specific instances.
+This is probably caused by the grid generation of the randomized algorithm as it produces a lot of overhead.
+As expected, the brute force algorithm demonstrates a significantly faster growth rate compared to both other algorithms.
+
+Overall, for shown instances sizes, the deterministic algorithm appears to be the optimal choice. While in theory, the randomized algorithm is expected to eventually outperform, this might only hold true for unreasonably large instances.
