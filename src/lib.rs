@@ -49,7 +49,7 @@ pub fn brute_force(points: &[Rc<Point>]) -> (Rc<Point>, Rc<Point>, f64) {
 }
 
 pub struct Grid {
-    grid: HashMap<usize, HashMap<usize, Vec<Rc<Point>>>>,
+    grid: HashMap<(usize,usize), Vec<Rc<Point>>>,
     delta: f64,
 }
 
@@ -68,6 +68,13 @@ impl Grid {
         }
     }
 
+    pub fn with_capacity(delta: f64, capacity: usize) -> Grid {
+        Grid {
+            grid: HashMap::with_capacity(capacity),
+            delta,
+        }
+    }
+
     pub fn insert(&mut self, point: &Rc<Point>) {
         assert!(point.0 >= 0.0);
         assert!(point.1 >= 0.0);
@@ -80,15 +87,11 @@ impl Grid {
     }
 
     pub fn get_cell_or_create_new(&mut self, x: usize, y: usize) -> &mut Vec<Rc<Point>> {
-        let map = self.grid.entry(x).or_insert_with(HashMap::new);
-        let list = map.entry(y).or_insert_with(Vec::new);
-        list
+        let map = self.grid.entry((x,y)).or_insert_with(Vec::new);
+        map
     }
 
     pub fn get_cell(&mut self, x: usize, y: usize) -> Option<&Vec<Rc<Point>>> {
-        match self.grid.get(&x) {
-            Some(a) => return a.get(&y),
-            None => return None,
-        }
+        self.grid.get(&(x,y))
     }
 }

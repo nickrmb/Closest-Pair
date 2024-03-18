@@ -25,7 +25,7 @@ fn main() {
         let mut points = create_random_points(n);
 
         let t1 = Instant::now();
-        let _ = brute_force(&points);
+        // let _ = brute_force(&points);
         let t2 = Instant::now();
         let _ = deterministic::solve(&mut points);
         let t3 = Instant::now();

@@ -41,7 +41,7 @@ pub fn solve(points: &mut Vec<Rc<Point>>) -> (Rc<Point>, Rc<Point>, f64) {
     let mut dist = p1.euclidean_dist(&p2);
 
     // create new grid with distance as delta
-    let mut grid = Grid::new(dist);
+    let mut grid = Grid::with_capacity(dist, points.len());
     grid.insert(&p1);
     grid.insert(&p2);
 
@@ -95,7 +95,7 @@ pub fn solve(points: &mut Vec<Rc<Point>>) -> (Rc<Point>, Rc<Point>, f64) {
 
         if changed {
             // create new grid
-            grid = Grid::new(dist);
+            grid = Grid::with_capacity(dist, points.len());
 
             // insert all previous points
             for j in 0..i {
